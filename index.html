@@ -24,7 +24,7 @@
     <link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
   
       
-  
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> 
 </head>
 <body>
   <div class="header">
@@ -93,7 +93,8 @@
             <div class="wrapbox">
               <h1>Chatting with (Model Name)</h1>
           			<img style="border:0px solid #782685; padding: 0;" src="image/modelpic/mainpic.jpg"  width="100%"/></a>
-
+		<div id="log">
+		</div>
 
           			<div class="chat">
           				<div id="chatbot">
@@ -175,7 +176,7 @@
 			today = mm+'/'+dd+'/'+yyyy;
 
 	</script>
-==================== end	
+
 	
 <style type="text/css">
 .mytext{
@@ -314,10 +315,9 @@ input:focus{
 
 
     </style>
-<script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>	
+
 	
-	
-	  <div class="col-sm-12 col-xs-12 col-md-4 col-lg-3  col-sm-offset-4 frame">
+	  <div class="col-sm-10 col-xs-10 col-md-4 col-lg-3  col-sm-offset-4 frame">
 			<div class="msg_header">
 				<div class="msg_header_img">
 					<img src="image/modelpic/5.jpg">
@@ -339,21 +339,40 @@ input:focus{
 
                 </div>
                 <div style="padding:10px;">
-                    <span class="glyphicon glyphicon-share-alt"></span>
+                    <span class="fa fa-paper-plane"></span>
                 </div>                
             </div>
         </div> 
 
 <script type="text/javascript">
-var api_key = "1615495851";
-localStorage.setItem("guest_session", Date.now());
+var base_url = "http://localhost/webchat";
+var api_key = "1615976018";
+if(localStorage.getItem("guest_session")==null){
+	localStorage.setItem("guest_session", Date.now());
+}
+
 var session = localStorage.getItem("guest_session");
 
 var me = {};
 me.avatar = "image/modelpic/5.jpg";
 
 var you = {};
-you.avatar = "https://a11.t26.net/taringa/avatares/9/1/2/F/7/8/Demon_King1/48x48_5C5.jpg"; 
+you.avatar = ""; 
+
+
+// Extra Info
+	var client_data = {os_name:null,os_version:null,browser_name:null,browser_version:null,user_agent:null,user_ip:null,user_state:null,user_city:null,user_region:null,user_country:null,lat:null,lon:null};
+
+// Start the chat as new or check existing //
+ setTimeout(
+        function(){	
+           startChat(api_key);
+        }, 5000);
+		
+var intervalId = window.setInterval(function(){
+  receiveAIMessage(api_key);
+}, 5000);		
+		
 
 function formatAMPM(date) {
     var hours = date.getHours();
@@ -406,45 +425,202 @@ $(".mytext").on("keydown", function(e){
     if (e.which == 13){
         var text = $(this).val();
         if (text !== ""){
-            insertChat("you", text);              
+			sendUserMessage(api_key,text)            
             $(this).val('');
         }
     }
 });
 
-
+// For starting only
 function startChat(api_key=null) {
-  var data = new FormData();
-	data.append("api_key", api_key);
-	data.append("session", session);
+	
+	var postdata = {'api_key':api_key,'session':session,'message':'start','client_data':client_data};
 
-	var xhr = new XMLHttpRequest();
-	xhr.withCredentials = true;
+			$.ajax({
+			   type:'POST',
+			   url:base_url+'/api/v1/chatstart',
+			   data:postdata,
+			   success:function(data) {
+					
+				return 	data;
 
-	xhr.addEventListener("readystatechange", function() {
-	  if(this.readyState === 4) {
-		var response = JSON.parse(this.responseText);
-		
-		var first_message = response.response.message;
-		insertChat("me", first_message); 
-	  }
-	});
-
-	xhr.open("POST", "http://localhost/webchat/api/v1/chatstart");
-
-	xhr.send(data);
+			   }
+			});	
+	
 }
 
+// For Conversation
+function sendUserMessage(api_key=null,user_message) {
+    var control = "";
+    var date = formatAMPM(new Date());
+	var postdata = {'api_key':api_key,'session':session,'message':user_message};
+			$.ajax({
+			   type:'POST',
+			   url:base_url+'/api/v1/receiveMessage',
+			   data:postdata,
+			   success:function(data) {
+					
+				return 	data;
 
+			   }
+			});
 
+	control = '<li style="width:100%;">' +
+                        '<div class="msj-rta macro">' +
+                            '<div class="text text-r">' +
+                                '<p>'+user_message+'</p>' +
+                                '<p><small>'+date+'</small></p>' +
+                            '</div>' +                               
+                  '</li>';	
+				  
+	 $("ul").append(control).scrollTop($("ul").prop('scrollHeight'));			  
+	
+}
 
-// Execution //
- setTimeout(
-        function(){	
-			alert('Fuck u Hima');
-           startChat(api_key);
-        }, 5000);
+// For Conversation
+function receiveAIMessage(api_key=null) {
+    var date = formatAMPM(new Date());
+	
+	var postdata = {'api_key':api_key,'session':session};
+			$.ajax({
+			   type:'POST',
+			   url:base_url+'/api/v1/sendMessage',
+			   data:postdata,
+			   success:function(data) {	
+			   
+			   console.log(data);
+			   
+				var	control = '<li style="width:100%">' +
+                        '<div class="msj macro">' +
+                        '<div class="avatar"><img class="img-circle" style="width:100%;" src="'+ me.avatar +'" /></div>' +
+                            '<div class="text text-l">' +
+                                '<p>'+ data.response.message +'</p>' +
+                                '<p><small>'+date+'</small></p>' +
+                            '</div>' +
+                        '</div>' +
+                    '</li>';
+				  
+					$("ul").append(control).scrollTop($("ul").prop('scrollHeight'));	
+				
+
+			   }
+			});	
+				
+					
+}
 </script>
+
+
+
+<script>
+
+(function () {
+    'use strict';
+    
+    var module = {
+        options: [],
+        header: [navigator.platform, navigator.userAgent, navigator.appVersion, navigator.vendor, window.opera],
+        dataos: [
+            { name: 'Windows Phone', value: 'Windows Phone', version: 'OS' },
+            { name: 'Windows', value: 'Win', version: 'NT' },
+            { name: 'iPhone', value: 'iPhone', version: 'OS' },
+            { name: 'iPad', value: 'iPad', version: 'OS' },
+            { name: 'Kindle', value: 'Silk', version: 'Silk' },
+            { name: 'Android', value: 'Android', version: 'Android' },
+            { name: 'PlayBook', value: 'PlayBook', version: 'OS' },
+            { name: 'BlackBerry', value: 'BlackBerry', version: '/' },
+            { name: 'Macintosh', value: 'Mac', version: 'OS X' },
+            { name: 'Linux', value: 'Linux', version: 'rv' },
+            { name: 'Palm', value: 'Palm', version: 'PalmOS' }
+        ],
+        databrowser: [
+            { name: 'Chrome', value: 'Chrome', version: 'Chrome' },
+            { name: 'Firefox', value: 'Firefox', version: 'Firefox' },
+            { name: 'Safari', value: 'Safari', version: 'Version' },
+            { name: 'Internet Explorer', value: 'MSIE', version: 'MSIE' },
+            { name: 'Opera', value: 'Opera', version: 'Opera' },
+            { name: 'BlackBerry', value: 'CLDC', version: 'CLDC' },
+            { name: 'Mozilla', value: 'Mozilla', version: 'Mozilla' }
+        ],
+        init: function () {
+            var agent = this.header.join(' '),
+                os = this.matchItem(agent, this.dataos),
+                browser = this.matchItem(agent, this.databrowser);
+            
+            return { os: os, browser: browser };
+        },
+        matchItem: function (string, data) {
+            var i = 0,
+                j = 0,
+                html = '',
+                regex,
+                regexv,
+                match,
+                matches,
+                version;
+            
+            for (i = 0; i < data.length; i += 1) {
+                regex = new RegExp(data[i].value, 'i');
+                match = regex.test(string);
+                if (match) {
+                    regexv = new RegExp(data[i].version + '[- /:;]([\\d._]+)', 'i');
+                    matches = string.match(regexv);
+                    version = '';
+                    if (matches) { if (matches[1]) { matches = matches[1]; } }
+                    if (matches) {
+                        matches = matches.split(/[._]+/);
+                        for (j = 0; j < matches.length; j += 1) {
+                            if (j === 0) {
+                                version += matches[j] + '.';
+                            } else {
+                                version += matches[j];
+                            }
+                        }
+                    } else {
+                        version = '0';
+                    }
+                    return {
+                        name: data[i].name,
+                        version: parseFloat(version)
+                    };
+                }
+            }
+            return { name: 'unknown', version: 0 };
+        }
+    };
+    
+    var e = module.init(),
+        debug = '';
+	client_data.os_name = e.os.name;
+	client_data.os_version = e.os.version;
+	client_data.browser_name = e.browser.name;
+	client_data.browser_version = e.browser.version;
+	client_data.user_agent = navigator.userAgent
+	client_data.vendor =  navigator.vendor;
+}());
+
+
+
+$.getJSON('http://www.geoplugin.net/json.gp?jsoncallback=?', function(data) {
+  
+    var geodata = data;
+
+    client_data.user_ip = geodata.geoplugin_request;
+  	client_data.user_country = geodata.geoplugin_countryName;
+  	client_data.user_state = geodata.geoplugin_countryName;
+	client_data.user_city = geodata.geoplugin_city;
+	client_data.user_region = geodata.geoplugin_regionName;
+	client_data.lat = geodata.geoplugin_latitude;
+	client_data.lon = geodata.geoplugin_longitude;
+  
+  
+});
+
+
+console.log(client_data);
+</script>
+
+
 
 </body>
 </html>
