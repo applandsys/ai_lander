@@ -23,8 +23,12 @@
   
     <link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
   
-      
+
  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> 
+ <style>
+
+ </style>
+ 
 </head>
 <body>
   <div class="header">
@@ -35,168 +39,51 @@
     </div>
   </div>
 
-  <div class="wrapper">
-    <div class="container">
-      <div class="mycontainer">
-        <div class='row'>
-          <div class="col-md-4 col-lg-4 col-sm-12 col-xs-12">
-            <div class="wrapbox">
-              <h1>PRIVATE INVITE</h1>
-              <div class="flavorbox">
-      					<p>Connect with this</p>
-      					<h2>Verified Member</h2>
-      					<h3>for free</h3>
-                <div class="profilepix">
-									<img src="image/modelpic/2.jpg">
-									<img src="image/modelpic/3.jpg">
-									<img src="image/modelpic/4.jpg">
-									<img src="image/modelpic/5.jpg">
-			        	</div>
-				      </div>
-            </div>
-          </div>
-          <div class="col-md-4 col-lg-4 col-sm-12 col-xs-12">
-            <div class="wrapbox">
-              <h1>MEMBER PROFILE</h1>
-              <div class="bstar">
-      					<img src="image/assets/star.png" alt="star">
-      					<img src="image/assets/star.png" alt="star">
-      					<img src="image/assets/star.png" alt="star">
-      					<img src="image/assets/star-half.png" alt="star half">
-      				</div>
-              <div class="star-number">9,891 user ratings</div>
-              <div class="likebox">
-      					<div class="liketxt"><span>102</span><p>likes</p></div>
-      					<div class="liketxt"><span>52</span><p>were here</p></div>
-      				</div>
-              <div class="mmx">
-                <span>Name</span><p id="fb_name" class="fcon">Model Name</p>
-              </div>
-              <div class="mmx"><span>Invite For</span><p class="fcon" id="their_name">You</p>
-              </div>
-              <div class="mmx"><span>Status</span><p>Single</p></div>
-              <div class="cmobil"><span>Mobile</span><p class="mcon">Confirmed</p></div>
-              <div class="cface"><span>Facebook</span><p class="fcon">Connected</p></div>
-              <div class="getit">Your Free Invite Expires In</div>
-
-              <div class="flavorbox time">
-        				<h3 id="countdown" class="bigTime time">0:10</h3>
-        			</div><br><br>
-
-              <div class="text-center"><a href="decline.html" class="main">Accept Invite</a></div>
-              <br/>
-              <div class="text-center"><a href="decline.html" class="plain">Decline Invite</center></div>
-
-            </div>
-          </div>
-            <div class="col-md-4 col-lg-4 col-sm-12 col-xs-12">
-            <div class="wrapbox">
-              <h1>Chatting with (Model Name)</h1>
-          			<img style="border:0px solid #782685; padding: 0;" src="image/modelpic/mainpic.jpg"  width="100%"/></a>
-		<div id="log">
-		</div>
-
-          			<div class="chat">
-          				<div id="chatbot">
-          					<div id="chatbot-message">
-								<div style="padding: 5px; font-size: 10px" align="center">
-								Facebook Invited Friend Has Joined Chat</div>
-								<p class="from-bot">
-									<span class="user">Model Name: </span>hey, say hi lol. sorry my phone died...</p>
-								<p class="from-bot"><span class="user">Model Name: </span>it says your still here, where you at?
-								</p>
-								<p class="from-bot"><span class="user">Model Name: </span>where are you???</p>
-								
-								<p class="from-bot"><span class="user">Model Name: </span>it says your still here, where you at?</p>
-							</div>
-
-							<div class="chat-form">
-							  <form>
-								  <div class="input-group mb-3">
-									<input type="text" class="form-control" placeholder="Message ...">
-									<div id="send_button" onclick="alert('Signup First')" class="input-group-append">
-									  <span class="input-group-text">Send</span>
-									</div>
-								  </div>
-								</form>
-							</div>
-
-          				</div>
-          			</div>
-          			<button class="blue_button">
-                  <i class="fa fa-angle-double-right" style="font-size:36px;float: left; margin-left: 10px; margin-top: -7px;"></i>
-                  Connect with Profile
-                </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
 
 
 
-	<script type="text/javascript">
 
-		setTimeout(function() {
-			$('.popthis').addClass('show');
-		}, 20000);
-			$('.mainfb, button, img, span, div').click(function() {
-				$('.popthis').addClass('show');
-			});
-			$('.popthis').click(function() {
-				$('.popthis').removeClass('show');
-			});
-			var seconds = 10;
-			function secondPassed() {
-				var minutes = Math.round((seconds - 30)/60);
-				var remainingSeconds = seconds % 60;
-				if (remainingSeconds < 10) {
-					remainingSeconds = "0" + remainingSeconds;
-				}
-				document.getElementById('countdown').innerHTML = minutes + ":" + remainingSeconds;
-				if (seconds == 0) {
-					clearInterval(countdownTimer);
-					document.getElementById('countdown').innerHTML = "<span class='lastChance'>HURRY</span>";
-				} else {
-					seconds--;
-				}
-			}
-			var countdownTimer = setInterval('secondPassed()', 1000);
-			var today = new Date();
-			var dd = today.getDate();
-			var mm = today.getMonth()+1; //January is 0
-			var yyyy = today.getFullYear();
-			if(dd<10) {
-			dd='0'+dd
-			}
-			if(mm<10) {
-			mm='0'+mm
-			}
-			today = mm+'/'+dd+'/'+yyyy;
-
-	</script>
 
 	
 <style type="text/css">
+@import url('https://fonts.gstatic.com');
+@import url('https://fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i');
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap');
+
+
+
 .mytext{
     border:0;padding:10px;background:whitesmoke;
 }
 .text{
-    width:75%;display:flex;flex-direction:column;
+	display:flex;flex-direction:column;
+	font-family: 'Open Sans', sans-serif;
 }
 .text > p:first-of-type{
     width:100%;margin-top:0;margin-bottom:auto;line-height: 13px;    font-size: 1.2em;;
 }
 .text > p:last-of-type{
-    width:100%;text-align:right;color:silver;margin-bottom:-7px;margin-top:auto;
+    width: 100%;
+    color: #000;
+    margin-bottom: -7px;
+    padding-top: 9px;
+	line-height: 1;
 }
 .text-l{
     float:left;padding-right:10px;
 }        
 .text-r{
-    float:right;padding-left:10px;
+	float:right;padding-left:10px;
+      
 }
+
+.text-right{
+ float: right;
+    padding-left: 10px;
+    padding-bottom: 18px;
+}
+
 .avatar{
     display:flex;
     justify-content:center;
@@ -205,12 +92,39 @@
     float:left;
     padding-right:10px;
 }
-.macro{
-    margin-top:5px;width:85%;border-radius:5px;padding:5px;display:flex;
+
+.avatar_you{
+       display: inline-block;
+    /* justify-content: center; */
+    /* align-items: center; */
+    width: 50px;
+    /* float: right; */
+    /* padding-right: 10px; */
+    /* position: absolute; */
+    float: right;
 }
+
+
+
+
+.macro{
+    margin-top:5px;width: 83%;border-radius:5px;padding:5px;display:flex;
+}
+
+.msg-rta{
+    background: whitesmoke;
+    display: inline-flex;
+    /* border: 1px solid; */
+    width: 83%;
+    margin-top: 2px;
+}
+
 .msj-rta{
     float:right;background:whitesmoke;
 }
+
+
+
 .msj{
     float:left;background:white;
 }
@@ -225,6 +139,7 @@
     right: 0;
     border: 0;
     bottom: 0;
+	border-radius: 10px 10px 0px 0px;
 }
 .frame > div:last-of-type{
     position:absolute;bottom:0;width:100%;display:flex;
@@ -286,49 +201,101 @@ input:focus{
 
 .msg_header{
 	border: 1px solid #ccc;
-	width: 100%;
-	height: 10%;
-	margin-bottom: 90px;
-	border-bottom: none;
-	display: inline-block;
-	background-color: #007bff;
-	display: relative;
-	//z-index: 999;
+    width: 100%;
+    height: 10%;
+    margin-bottom: 90px;
+    border-bottom: none;
+    display: inline-block;
+    background-color: #007bff;
+    display: relative;
+    border-radius: 10px 10px 0px 0px;
 } 
 
 .msg_header_img img{
 	border-radius: 50%;
-	width: 40px;
-	margin-left: 5%;
-	margin-top: 12px;
+    /* width: 40px; */
+    margin-left: 2%;
+    margin-top: 3px;
+    width: 40px;
+    height: 40px;
 	
 }
 
-.chat_up{
-	margin-top: 50px;
-}
-
-.typing{
-	    display: flex;
-    font-size: 10px;
+.chat_up {
+    margin-top: 68px;
 }
 
 
+ .chat-bubble {
+  background-color:#E6F8F1;
+  padding:16px 28px;
+  -webkit-border-radius: 20px;
+  -webkit-border-bottom-left-radius: 2px;
+  -moz-border-radius: 20px;
+  -moz-border-radius-bottomleft: 2px;
+  border-radius: 20px;
+  border-bottom-left-radius: 2px;
+  display:inline-block;
+}
+.typing {
+  align-items: center;
+  display: flex;
+  height: 17px;
+}
+.typing .dot {
+  animation: mercuryTypingAnimation 1.8s infinite ease-in-out;
+  background-color: #6CAD96 ; //rgba(20,105,69,.7);
+  border-radius: 50%;
+  height: 7px;
+  margin-right: 4px;
+  vertical-align: middle;
+  width: 7px;
+  display: inline-block;
+}
+.typing .dot:nth-child(1) {
+  animation-delay: 200ms;
+}
+.typing .dot:nth-child(2) {
+  animation-delay: 300ms;
+}
+.typing .dot:nth-child(3) {
+  animation-delay: 400ms;
+}
+.typing .dot:last-child {
+  margin-right: 0;
+}
+
+@keyframes mercuryTypingAnimation {
+  0% {
+    transform: translateY(0px);
+    background-color:#6CAD96; // rgba(20,105,69,.7);
+  }
+  28% {
+    transform: translateY(-7px);
+    background-color:#9ECAB9; //rgba(20,105,69,.4);
+  }
+  44% {
+    transform: translateY(0px);
+    background-color: #B5D9CB; //rgba(20,105,69,.2);
+  }
+}
+
+
+.avatar_name{
+	color: white;
+	font-family: 'Ubuntu', sans-serif;
+}
     </style>
 
 	
-	  <div class="col-sm-10 col-xs-10 col-md-4 col-lg-3  col-sm-offset-4 frame">
+	  <div class="col-sm-10 col-xs-10 col-md-4 col-lg-3  frame">
 			<div class="msg_header">
 				<div class="msg_header_img">
-					<img src="image/modelpic/5.jpg">
+					<img src="http://localhost/webchat/public/storage/campaign_avatar/1615976018.jpg" width="40px" height="40px"> <span id="avatar_name" class="avatar_name">Samantha Sathia</span>
 				</div>
 			</div>
 				
 				<ul class="chat_up">
-					<li>
-					
-					</li>
-				
 				</ul>
 					
             <div>
@@ -336,9 +303,8 @@ input:focus{
                     <div class="text text-r" style="background:whitesmoke !important">
                         <input class="mytext" placeholder="Type a message"/>
                     </div> 
-
                 </div>
-                <div style="padding:10px;">
+                <div style="padding:3px; display: inline-flex">
                     <span class="fa fa-paper-plane"></span>
                 </div>                
             </div>
@@ -346,7 +312,8 @@ input:focus{
 
 <script type="text/javascript">
 var base_url = "http://localhost/webchat";
-var api_key = "1615976018";
+var api_key = "YjVhfhFisIQgihUr";
+var typing_status = false;
 if(localStorage.getItem("guest_session")==null){
 	localStorage.setItem("guest_session", Date.now());
 }
@@ -354,10 +321,10 @@ if(localStorage.getItem("guest_session")==null){
 var session = localStorage.getItem("guest_session");
 
 var me = {};
-me.avatar = "image/modelpic/5.jpg";
+me.avatar = "http://localhost/webchat/public/storage/campaign_avatar/1615976018.jpg";
 
 var you = {};
-you.avatar = ""; 
+you.avatar = "image/chatavatar.png"; 
 
 
 // Extra Info
@@ -370,8 +337,8 @@ you.avatar = "";
         }, 5000);
 		
 var intervalId = window.setInterval(function(){
- // receiveAIMessage(api_key);
-}, 5000);		
+  receiveAIMessage(api_key);
+}, 15000);		
 		
 
 function formatAMPM(date) {
@@ -407,8 +374,49 @@ function startChat(api_key=null) {
 			   data:postdata,
 			   success:function(data) {
 					
-				return 	data;
+				console.log(data);
 
+			   }
+			});	
+	
+}
+
+// For starting only
+function loadConversaton(api_key=null) {
+	var control = "";
+	var postdata = {'api_key':api_key,'session':session,'message':'load_conversation'};
+
+			$.ajax({
+			   type:'POST',
+			   url:base_url+'/api/v1/loadMessage',
+			   data:postdata,
+			   success:function(data) {
+					var all_message ="";
+					$.each(data.response.message, function(k, v) {
+						if(v.type=='outgoing'){
+								all_message += '<li style="width:100%">' +
+											'<div class="avatar"><img class="img-circle" width="40px" height="40px" src="'+ me.avatar +'" /></div>' +
+											'<div class="msj macro">' +
+											
+												'<div class="text text-l">' +
+													'<p>'+ v.message +'</p>' +
+												'</div>' +
+											'</div>' +
+										'</li>';
+						
+						}else if(v.type=='incoming'){
+								all_message +=  '<li style="width:100%; display: inline-block">' +
+												'<div class="msg-rta macro">' +
+													'<div class="text text-right">' +
+														'<p>'+v.message +'</p>' +
+													'</div>' + 
+												'</div>' + 
+												'<div class="avatar_you"><img class="img-circle"  width="40px" height="40px" src="'+ you.avatar +'" /></div>' +									
+										  '</li>';	
+						
+						}
+					});
+				$("ul").append(all_message).scrollTop($("ul").prop('scrollHeight'));	
 			   }
 			});	
 	
@@ -430,12 +438,13 @@ function sendUserMessage(api_key=null,user_message) {
 			   }
 			});
 
-	control = '<li style="width:100%;">' +
-                        '<div class="msj-rta macro">' +
-                            '<div class="text text-r">' +
+	control = '<li style="width:100%; display: inline-block">' +
+                        '<div class="msg-rta macro">' +
+                            '<div class="text text-right">' +
                                 '<p>'+user_message+'</p>' +
-                                '<p><small>'+date+'</small></p>' +
-                            '</div>' +                               
+                            '</div>' + 
+                        '</div>' + 
+						'<div class="avatar_you"><img class="img-circle"  width="40px" height="40px" src="'+ you.avatar +'" /></div>' +									
                   '</li>';	
 				  
 	 $("ul").append(control).scrollTop($("ul").prop('scrollHeight'));			  
@@ -445,30 +454,70 @@ function sendUserMessage(api_key=null,user_message) {
 // For Conversation
 function receiveAIMessage(api_key=null) {
     var date = formatAMPM(new Date());
-	
+	var control = "";
 	var postdata = {'api_key':api_key,'session':session};
+		
+	var chat_bubble = '<div class="chat-bubble" id="chat_bubble">'+
+							'<div class="typing">'+ 
+								'<div class="dot"></div>'+
+								'<div class="dot"></div>'+
+								'<div class="dot"></div>'+
+							'</div>'+
+						'</div>';
+	
+		
+
 			$.ajax({
 			   type:'POST',
 			   url:base_url+'/api/v1/sendMessage',
 			   data:postdata,
 			   success:function(data) {	
-			   
-			   console.log(data);
-			   
-				var	control = '<li style="width:100%">' +
-                        '<div class="msj macro">' +
-                        '<div class="avatar"><img class="img-circle" style="width:100%;" src="'+ me.avatar +'" /></div>' +
-                            '<div class="text text-l">' +
-                                '<p>'+ data.response.message +'</p>' +
-                                '<p><small>'+date+'</small></p>' +
-                            '</div>' +
-                        '</div>' +
-                    '</li>';
-				  
-					$("ul").append(control).scrollTop($("ul").prop('scrollHeight'));	
-				
 
-			   }
+				var message = data.response.message ;
+
+				
+					if(message!='sent'){
+					
+						if(message=='Typing'){
+							if(typing_status==false){
+							
+								control = '<li style="width:100%">' +
+											'<div class="avatar"><img class="img-circle"  width="40px" height="40px" src="'+ me.avatar +'" /></div>' +
+											'<div class="">' +
+												'<div class="text text-l">' +
+													'<p>'+ chat_bubble +'</p>' +
+												'</div>' +
+											'</div>' +
+										'</li>';
+			   
+						
+								$("ul").append(control).scrollTop($("ul").prop('scrollHeight'));
+								
+								typing_status = true;
+							}
+						}else{
+						
+							typing_status = false;
+							$("#chat_bubble").parents('li').remove();
+							
+								control = '<li style="width:100%">' +
+											'<div class="avatar"><img class="img-circle" width="40px" height="40px" src="'+ me.avatar +'" /></div>' +
+											'<div class="msj macro">' +
+											
+												'<div class="text text-l">' +
+													'<p>'+ message +'</p>' +
+												'</div>' +
+											'</div>' +
+										'</li>';
+			   
+						
+							
+							$("ul").append(control).scrollTop($("ul").prop('scrollHeight'));
+								
+						}
+				
+					}	
+				}
 			});	
 				
 					
@@ -562,6 +611,11 @@ function receiveAIMessage(api_key=null) {
 	client_data.browser_version = e.browser.version;
 	client_data.user_agent = navigator.userAgent
 	client_data.vendor =  navigator.vendor;
+	
+
+	loadConversaton(api_key);
+	
+	
 }());
 
 
@@ -589,9 +643,3 @@ console.log(client_data);
 
 </body>
 </html>
-
-
-<!--
-'<div class="typing"><span>Typing.. </span><lottie-player src="https://assets4.lottiefiles.com/packages/lf20_nZBVpi.json"  background="transparent"  speed="1"  style="width: 60px; height: 60px;"   autoplay></lottie-player></div>';
-
--->
