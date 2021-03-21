@@ -25,9 +25,8 @@
   
 
  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> 
- <style>
 
- </style>
+
  
 </head>
 <body>
@@ -128,7 +127,7 @@
 }
 
 .msg-rta{
-    background: whitesmoke;
+    background: #E6F8F1;
     display: inline-flex;
     /* border: 1px solid; */
     width: 83%;
@@ -136,7 +135,7 @@
 }
 
 .msg-lta{
-    background: whitesmoke;
+    background: #E6F8F1;
     display: inline-flex;
     /* border: 1px solid; */
     width: 83%;
@@ -154,14 +153,14 @@
     float:left;background:white;
 }
 .frame{
-        background: #e0e0de;
+    background: #e0e0de;
     height: 450px;
     overflow: hidden;
     padding: 0;
     border: 1px solid red;
     position: fixed;
     /* left: 0; */
-    right: 0;
+    right: 60px;
     border: 0;
     bottom: 0;
 	border-radius: 10px 10px 0px 0px;
@@ -312,7 +311,7 @@ input:focus{
 }
 
 .list_item{
-  width:100%; display: inline-block;
+  width:100%; display: inline-block; margin-top: 5px
 }
 
 .minimize_btn{ 
@@ -347,13 +346,14 @@ input:focus{
 				</ul>
 					
             <div>
-                <div class="msj-rta macro">                        
-                    <div class="text text-r" style="background:whitesmoke !important">
-                        <input class="mytext" placeholder="Type a message"/>
+                <div class="msj-rta macro">    
+					<!--<span class="fa fa-paperclip"></span>-->				
+                    <div class="text text-r" style="background:whitesmoke !important; display: inline-block">
+                      <input class="mytext" placeholder="Type a message"/>
                     </div> 
                 </div>
-                <div style="padding:3px; display: inline-flex" id="send_icon">
-                    <span class="fa fa-paper-plane"></span>
+                <div style="padding:3px; display: inline-flex" >
+                     <span class="fa fa-paper-plane" id="send_icon"></span>
                 </div>                
             </div>
         </div> 
@@ -379,7 +379,7 @@ you.avatar = "image/chatavatar.png";
 	var client_data = {os_name:null,os_version:null,browser_name:null,browser_version:null,user_agent:null,user_ip:null,user_state:null,user_city:null,user_region:null,user_country:null,lat:null,lon:null};
 
 // Start the chat as new or check existing //
-setTimeout(
+ setTimeout(
         function(){	
            startChat(api_key);
         }, 5000);
@@ -696,7 +696,18 @@ $.getJSON('http://www.geoplugin.net/json.gp?jsoncallback=?', function(data) {
 console.log(client_data);
 </script>
 
-
+    <script src="js/fgEmojiPicker.js"></script>
+    <script>
+        const emojiPicker = new FgEmojiPicker({
+            trigger: ['button'],
+            position: ['bottom', 'right'],
+            preFetch: true,
+            insertInto: document.querySelector('textarea'),
+            emit(obj, triggerElement) {
+                console.log(obj, triggerElement);
+            }
+        });
+    </script>
 
 </body>
 </html>
