@@ -52,7 +52,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap');
 
 
-
 .mytext{
     border:0;padding:10px;background:whitesmoke;
 }
@@ -80,7 +79,12 @@
 
 .text-right{
  float: right;
-    padding-left: 10px;
+    padding-left: 1px;
+    padding-bottom: 18px;
+}
+.text-left{
+ float: left;
+    padding-left: 1px;
     padding-bottom: 18px;
 }
 
@@ -104,6 +108,18 @@
     float: right;
 }
 
+.avatar_me{
+       display: inline-block;
+    /* justify-content: center; */
+    /* align-items: center; */
+    width: 50px;
+    /* float: right; */
+    /* padding-right: 10px; */
+    /* position: absolute; */
+    float: left;
+}
+
+
 
 
 
@@ -118,6 +134,15 @@
     width: 83%;
     margin-top: 2px;
 }
+
+.msg-lta{
+    background: whitesmoke;
+    display: inline-flex;
+    /* border: 1px solid; */
+    width: 83%;
+    margin-top: 2px;
+}
+
 
 .msj-rta{
     float:right;background:whitesmoke;
@@ -285,6 +310,23 @@ input:focus{
 	color: white;
 	font-family: 'Ubuntu', sans-serif;
 }
+
+.list_item{
+  width:100%; display: inline-block;
+}
+
+.minimize_btn{ 
+    position: relative;
+    float: right;
+       padding: 3px;
+}
+
+.close{
+ font-size: 37px;
+
+    color: #ffffff;
+}
+
     </style>
 
 	
@@ -292,6 +334,12 @@ input:focus{
 			<div class="msg_header">
 				<div class="msg_header_img">
 					<img src="http://localhost/webchat/public/storage/campaign_avatar/1615976018.jpg" width="40px" height="40px"> <span id="avatar_name" class="avatar_name">Samantha Sathia</span>
+					
+					<div class="minimize_btn" id="minimize_btn">
+						<button type="button" class="close" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
 				</div>
 			</div>
 				
@@ -304,7 +352,7 @@ input:focus{
                         <input class="mytext" placeholder="Type a message"/>
                     </div> 
                 </div>
-                <div style="padding:3px; display: inline-flex">
+                <div style="padding:3px; display: inline-flex" id="send_icon">
                     <span class="fa fa-paper-plane"></span>
                 </div>                
             </div>
@@ -331,7 +379,7 @@ you.avatar = "image/chatavatar.png";
 	var client_data = {os_name:null,os_version:null,browser_name:null,browser_version:null,user_agent:null,user_ip:null,user_state:null,user_city:null,user_region:null,user_country:null,lat:null,lon:null};
 
 // Start the chat as new or check existing //
- setTimeout(
+setTimeout(
         function(){	
            startChat(api_key);
         }, 5000);
@@ -361,6 +409,16 @@ $(".mytext").on("keydown", function(e){
             $(this).val('');
         }
     }
+});
+
+$("#send_icon").on("click", function(e){
+    
+	var text = $(".mytext").val();
+	if (text !== ""){
+		sendUserMessage(api_key,text)            
+		$(".mytext").val('');
+	}
+   
 });
 
 // For starting only
@@ -394,25 +452,25 @@ function loadConversaton(api_key=null) {
 					var all_message ="";
 					$.each(data.response.message, function(k, v) {
 						if(v.type=='outgoing'){
-								all_message += '<li style="width:100%">' +
-											'<div class="avatar"><img class="img-circle" width="40px" height="40px" src="'+ me.avatar +'" /></div>' +
-											'<div class="msj macro">' +
-											
-												'<div class="text text-l">' +
-													'<p>'+ v.message +'</p>' +
+								all_message += '<li class="list_item">' +
+												'<div class="avatar"><img class="img-circle" width="40px" height="40px" src="'+ me.avatar +'" /></div>' +
+												'<div class="msj macro">' +
+												
+													'<div class="text text-l">' +
+														'<p>'+ v.message +'</p>' +
+													'</div>' +
 												'</div>' +
-											'</div>' +
-										'</li>';
+											'</li>';
 						
 						}else if(v.type=='incoming'){
-								all_message +=  '<li style="width:100%; display: inline-block">' +
-												'<div class="msg-rta macro">' +
-													'<div class="text text-right">' +
-														'<p>'+v.message +'</p>' +
+								all_message +=  '<li class="list_item">' +
+													'<div class="msg-rta macro">' +
+														'<div class="text text-right">' +
+															'<p>'+v.message +'</p>' +
+														'</div>' + 
 													'</div>' + 
-												'</div>' + 
-												'<div class="avatar_you"><img class="img-circle"  width="40px" height="40px" src="'+ you.avatar +'" /></div>' +									
-										  '</li>';	
+													'<div class="avatar_you"><img class="img-circle"  width="40px" height="40px" src="'+ you.avatar +'" /></div>' +									
+											  '</li>';	
 						
 						}
 					});
@@ -438,7 +496,7 @@ function sendUserMessage(api_key=null,user_message) {
 			   }
 			});
 
-	control = '<li style="width:100%; display: inline-block">' +
+		control = '<li class="list_item">' +
                         '<div class="msg-rta macro">' +
                             '<div class="text text-right">' +
                                 '<p>'+user_message+'</p>' +
@@ -481,7 +539,7 @@ function receiveAIMessage(api_key=null) {
 						if(message=='Typing'){
 							if(typing_status==false){
 							
-								control = '<li style="width:100%">' +
+								control = '<li style="width:100%  display: inline-block"">' +
 											'<div class="avatar"><img class="img-circle"  width="40px" height="40px" src="'+ me.avatar +'" /></div>' +
 											'<div class="">' +
 												'<div class="text text-l">' +
@@ -500,15 +558,14 @@ function receiveAIMessage(api_key=null) {
 							typing_status = false;
 							$("#chat_bubble").parents('li').remove();
 							
-								control = '<li style="width:100%">' +
-											'<div class="avatar"><img class="img-circle" width="40px" height="40px" src="'+ me.avatar +'" /></div>' +
-											'<div class="msj macro">' +
-											
-												'<div class="text text-l">' +
-													'<p>'+ message +'</p>' +
-												'</div>' +
-											'</div>' +
-										'</li>';
+								control = '<li class="list_item">'+ 
+											'<div class="avatar_me"><img class="img-circle"  width="40px" height="40px" src="'+ me.avatar +'" /></div>' +
+												'<div class="msg-lta macro">' +
+													'<div class="text text-left">' +
+														'<p>'+message+'</p>' +
+													'</div>' + 
+												'</div>' + 										
+										  '</li>';	
 			   
 						
 							
